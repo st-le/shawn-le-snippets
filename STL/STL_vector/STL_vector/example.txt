@@ -1,0 +1,3 @@
+I'm Le Trung Son
+This is the writing to file test
+Writing this to a file.
