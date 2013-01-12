@@ -1,8 +1,17 @@
 // 06/01/13: run OK -> change Unicode character set to Multi-Byte character set
+// 06/01/13: use to split file name for image database
 
 #include <string.h>
 #include <iostream>
 #include <windows.h> 
+
+#include <vector>
+
+//#include <boost/regex.hpp>
+//#include <boost/algorithm/string/regex.hpp>
+
+using namespace std;
+//using namespace boost;
 
 void ListDirRec(const char *s); 
 
@@ -16,7 +25,11 @@ int main(){
 void ListDirRec(const char *s){    
 
 	char sDir[MAX_PATH]="\0", sTmp[MAX_PATH]="\0";    
-//	wchar_t sDir[MAX_PATH]="\0", sTmp[MAX_PATH]="\0";    
+//	wchar_t sDir[MAX_PATH]="\0", sTmp[MAX_PATH]="\0"; 
+
+	char name[MAX_PATH]="";
+	//string name_str;
+	vector<string> fields;
 
 	WIN32_FIND_DATA theFiles;    
 
@@ -42,8 +55,25 @@ void ListDirRec(const char *s){
 			strcat(sTmp, "\\");            			
 			ListDirRec(sTmp);        
 		}else
-		{            
-			std::cout<<s<<theFiles.cFileName<<std::endl;        
+		{  
+			// get the name
+			//name = theFiles.cFileName;
+			//name_str = name;
+			//string name_str(theFiles.cFileName);
+			string name_str = "12341234.jpg";
+		
+			// split the name
+			//split(fields, name_str, is_any_of(","));
+			istringstream  ss(name_str);
+			while(!ss.eof())
+			{
+				string x; 
+				getline(ss, x, ',');
+				cout << x << endl;
+			}
+
+			std::cout<<theFiles.cFileName<<std::endl;
+			//std::cout<<s<<theFiles.cFileName<<std::endl;
 		}    
 	} while(FindNextFile(hTheFiles, &theFiles));     
 
