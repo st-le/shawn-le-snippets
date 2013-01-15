@@ -135,34 +135,7 @@ void drawCircles(Mat& image, const Mat points)
 }
 */
 
-// Template function to access OpenCV Mat
-// Added 17/12/12 
-template <class Type>
-void drawCircles(Mat& image, const Mat_<Vec<Type, 2>> points, Scalar color)
-{
-	// fix format of Matrix <-> hard coding
 
-	//MatInfo(points);
-	//getchar();
-
-	//CV_Assert(points.channels() == 2);
-	//CV_Assert(points.depth() == CV_32FC2); // this is so restricted!!
-
-	//CV_Assert(points.channels() == 2);
-	//CV_Assert(points.depth() == CV_16UC2);
-
-	// added working for both row/col point vector
-
-	Point2d p0;
-
-	for (int i = 0; i < points.cols; i++)
-	{
-		p0.x = cvRound(points.at<Vec<Type, 2>>(0,i)[0]);
-		p0.y = cvRound(points.at<Vec<Type, 2>>(0,i)[1]);
-
-		circle(image, p0, 5, color, 2, 8);
-	}
-}
 
 void drawCircles(Mat& image, const Mat points, Scalar color)
 {
