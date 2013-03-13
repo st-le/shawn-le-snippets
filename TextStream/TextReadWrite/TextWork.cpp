@@ -3,6 +3,9 @@
 
 using namespace std;
 
+const unsigned int NAME_SZ = 255;
+const unsigned int FULLNAME_SZ = 510;
+
 int writeTextFile(char* filename, const std::vector<string> lines)
 {
 	 
@@ -37,4 +40,41 @@ int readTextFile(char* filename, std::vector<string>& lines)
 
     return 1;
 
+}
+
+void GetFileExtension(string filename, string& extension)
+{
+	vector<string> rec;
+
+	StrDelimit(filename, '.', rec);
+
+	//cout << rec[rec.size()-2].c_str()[1] << endl;
+
+	//extension = rec[rec.size()-2].c_str()[0];
+
+	//extension = &rec[rec.size()-2].c_str()[0];
+
+	extension = rec[rec.size()-2];	
+}
+
+void StrDelimit(string str, char del, vector<string>& substr)
+{
+
+	//stringstream ss(line_str);  // stringstream can work
+	istringstream ss(str);   // istringstream still works fine
+
+	char rec_sub[NAME_SZ];
+
+	while (ss)
+	{
+		//string rec_sub;
+
+		//getline(ss, rec_sub, del);
+		ss.getline(rec_sub, NAME_SZ, del);
+		substr.push_back(rec_sub);
+		//LoggerOut.getline(line, MAX, Delimiter);  // Delimiter helps to sparse the line
+
+		//		cout << rec_sub << endl;
+		//		getchar();
+	}
 }

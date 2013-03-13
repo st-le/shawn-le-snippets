@@ -5,3 +5,4 @@
 f
 l
 tu thi kim ha
+d/folder/fodler12/file.txt
