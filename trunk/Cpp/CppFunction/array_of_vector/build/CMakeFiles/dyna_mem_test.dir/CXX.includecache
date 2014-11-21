@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/shawnle/PROJECTs/CppWork/shawn-le-snippets/Cpp/CppFunction/array_of_vector/main.cpp
+iostream
+-
+stdio.h
+-
+fstream
+-
+string
+-
+vector
+-
+
