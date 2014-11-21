@@ -24,6 +24,24 @@ int afun(vector<int> *points, int size)
 	return ret;
 }
 
+int bfun(vector<int> points[], int size)
+{
+	int ret = 1;
+
+	for (int i=0; i<size; i++)
+	{
+	  for (int j=0; j<points[i].size(); j++)
+	  {
+	  	printf("%d ",points[i][j]);
+	  }
+		printf("\n");
+	}
+
+
+	return ret;
+}
+
+
 
 /** @function main */
 int main( int argc, char** argv )
@@ -41,7 +59,8 @@ int main( int argc, char** argv )
 	points[2] = pnts;
 
 	afun(points, 3);
+	printf("\n");
+	bfun(points, 3);
 	
-
 	return 0;
 }
