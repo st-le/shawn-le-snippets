@@ -25,6 +25,9 @@ using namespace std;
 using namespace Eigen;
 using namespace cv;
 
+/** TypeNames */
+//typedef Matrix<double, Dynamic, 1> VectorXd;
+
 /** Function Headers */
 
 /** Global variables */
@@ -39,27 +42,28 @@ float data[10] = {1,2,3,4,5,7,8,9,10,11};
 
 
 
+
 /** @function main */
 int main( int argc, const char** argv )
 {
 
-	Matrix3f m;
+	Matrix3d m;
 
-	m = AngleAxisf(0.25*M_PI, Vector3f::UnitX())
-      * AngleAxisf(0.5*M_PI, Vector3f::UnitY())
-      * AngleAxisf(0.33*M_PI, Vector3f::UnitZ());
+	m = AngleAxisd(0.25*M_PI, Vector3d::UnitX())
+      * AngleAxisd(0.5*M_PI, Vector3d::UnitY())
+      * AngleAxisd(0.33*M_PI, Vector3d::UnitZ());
 
 	cout << "original rotation:" << endl;
 	cout << m << endl << endl;
 
-	Vector3f ea = m.eulerAngles(0, 1, 2); 
+	Vector3d ea = m.eulerAngles(0, 1, 2); 
 	cout << "to Euler angles:" << endl;
 	cout << ea << endl << endl;
 
-	Matrix3f n;
-	n = AngleAxisf(ea[0], Vector3f::UnitX())
-	   *AngleAxisf(ea[1], Vector3f::UnitY())
-	   *AngleAxisf(ea[2], Vector3f::UnitZ()); 
+	Matrix3d n;
+	n = AngleAxisd(ea[0], Vector3d::UnitX())
+	   *AngleAxisd(ea[1], Vector3d::UnitY())
+	   *AngleAxisd(ea[2], Vector3d::UnitZ()); 
 	cout << "recalc original rotation:" << endl;
 	cout << n << endl;
 
@@ -67,8 +71,24 @@ int main( int argc, const char** argv )
 	Mat eaMat;
 	eigen2cv(ea, eaMat);
 	cout << "OpenCV result" << endl;
-	cout << eaMat << endl;
-	
+	cout << eaMat << endl << endl;
+
+	// block access
+	cout << n.block(0,0,3,3) << endl << endl;
+	//VectorXd d6vec.head(3) = n.row(0);
+	//d6vec.tail(3) << 1, 2, 3;
+	//cout << d6vec << endl << endl;
+
+	Matrix4d a;
+	a << 1, 2, 3, 4, 
+	     6, 7, 8, 9,
+		-1, 0, 3, 3,
+		 0, 0, 0, 1;
+
+	cout << a << endl;
+	cout << a.block<3,1>(0,3) << endl;
+	cout << a.block(0,3,3,1) << endl;
+
 	getchar();
 
 	return 0;
