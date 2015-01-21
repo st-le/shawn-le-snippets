@@ -21,6 +21,7 @@ public:
 	typedef int (myClass::*calc)(int a, int b);
 	
 	calc funptr;
+	FunPtrCall funextptr;
 
 	int compute(int a, int b)
 	{
@@ -72,7 +73,7 @@ public:
 
 	void call_ext_func()
 	{
-		int c = (this->*funextptr)(100,300);
+		int c = (*funextptr)(100,300);
 		cout << c << endl;
 		getchar();
 	}
